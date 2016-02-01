@@ -1,5 +1,3 @@
-## React Application skeleton
+## React Ingredients application
 
-This is a re-usable React and SASS skeleton. To use it you need to clone the repository and use npm install command.
-
-You also need to have gulp installed (npm install -g gulp)
+This is an extremely simple React application I built to teach some friends about React.
