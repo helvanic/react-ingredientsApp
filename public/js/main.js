@@ -19104,7 +19104,7 @@ var ListManager = React.createClass({
   render: function () {
     return React.createElement(
       'div',
-      null,
+      { className: 'col-12 col-m-3 list' },
       React.createElement(
         'h1',
         null,
@@ -19112,7 +19112,7 @@ var ListManager = React.createClass({
       ),
       React.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
+        { onSubmit: this.handleSubmit, className: 'col-10 col-center' },
         React.createElement('input', { onChange: this.onChange, type: 'text', value: this.state.newItemName }),
         React.createElement('input', { type: 'submit', value: 'Submit' })
       ),

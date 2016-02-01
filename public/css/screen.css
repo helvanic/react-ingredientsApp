@@ -186,3 +186,24 @@ html, body {
   display: none; }
 
 /* **** Modules **** */
+.list {
+  padding: 0px; }
+
+.list h1 {
+  margin: auto;
+  text-align: center; }
+
+.list form {
+  margin: 0 auto;
+  text-align: center; }
+
+.list form input {
+  display: inline-block;
+  width: 60%;
+  text-align: center;
+  margin-top: 10px; }
+
+.list ul {
+  list-style: none;
+  text-align: center;
+  padding: 0; }
