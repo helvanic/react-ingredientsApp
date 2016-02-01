@@ -3,6 +3,15 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var List = require('./components/List.jsx');
 
-ReactDOM.render(<List/>, document.getElementById('persons'));
+var ListManager = require('./components/ListManager.jsx');
+
+ReactDOM.render(
+  <div>
+    <ListManager title="Ingredients"/>
+    <ListManager title="Sport"/>
+    <ListManager title="Groceries"/>
+    <ListManager title="Hobbies"/>
+  </div>,
+  document.getElementById('gallery')
+);

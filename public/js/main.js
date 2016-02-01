@@ -19031,33 +19031,20 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],159:[function(require,module,exports){
-// Dependencies
 var React = require('react');
 var ListItem = require('./ListItem.jsx');
-
-var fakeIndividuals = [{
-  id: 1,
-  name: "Victor Dupuy"
-}, {
-  id: 2,
-  name: "Etienne Phelip"
-}, {
-  id: 3,
-  name: "Cedric Urvoy"
-}];
 
 var List = React.createClass({
   displayName: 'List',
 
   render: function () {
-    var listItems = fakeIndividuals.map(item => {
-      return React.createElement(ListItem, { key: item.id, name: item.name });
-    });
-
+    var createItem = function (name, index) {
+      return React.createElement(ListItem, { key: index + name, name: name });
+    };
     return React.createElement(
       'ul',
       null,
-      listItems
+      this.props.items.map(createItem)
     );
   }
 });
@@ -19086,13 +19073,72 @@ var ListItem = React.createClass({
 module.exports = ListItem;
 
 },{"react":157}],161:[function(require,module,exports){
+var React = require('react');
+var List = require('./List.jsx');
+
+var ListManager = React.createClass({
+  displayName: 'ListManager',
+
+  getInitialState: function () {
+    //ALWAYS called on component's first load.
+    return {
+      items: [],
+      newItemName: ""
+    };
+  },
+
+  handleSubmit: function (e) {
+    e.preventDefault();
+    var currentItems = this.state.items;
+    currentItems.push(this.state.newItemName);
+    this.setState({
+      items: currentItems,
+      newItemName: ""
+    });
+  },
+
+  onChange: function (e) {
+    this.setState({ newItemName: e.target.value }); // We change newItemName when the user writes data
+  },
+
+  render: function () {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        null,
+        this.props.title
+      ),
+      React.createElement(
+        'form',
+        { onSubmit: this.handleSubmit },
+        React.createElement('input', { onChange: this.onChange, type: 'text', value: this.state.newItemName }),
+        React.createElement('input', { type: 'submit', value: 'Submit' })
+      ),
+      React.createElement(List, { items: this.state.items })
+    );
+  }
+});
+
+module.exports = ListManager;
+
+},{"./List.jsx":159,"react":157}],162:[function(require,module,exports){
 // This is the main entry point for the application
 // Here we'll call for other components
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var List = require('./components/List.jsx');
 
-ReactDOM.render(React.createElement(List, null), document.getElementById('persons'));
+var ListManager = require('./components/ListManager.jsx');
 
-},{"./components/List.jsx":159,"react":157,"react-dom":1}]},{},[161]);
+ReactDOM.render(React.createElement(
+  'div',
+  null,
+  React.createElement(ListManager, { title: 'Ingredients' }),
+  React.createElement(ListManager, { title: 'Sport' }),
+  React.createElement(ListManager, { title: 'Groceries' }),
+  React.createElement(ListManager, { title: 'Hobbies' })
+), document.getElementById('gallery'));
+
+},{"./components/ListManager.jsx":161,"react":157,"react-dom":1}]},{},[162]);
